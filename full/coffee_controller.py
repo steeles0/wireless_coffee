@@ -6,8 +6,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-   24 : {'name' : 'coffee maker', 'state' : GPIO.LOW},
-   17 : {'name' : 'lamp', 'state' : GPIO.LOW}
+   17 : {'name' : 'LED', 'state' : GPIO.LOW}
    }
 
 # Set each pin as an output and make it low:
@@ -58,7 +57,7 @@ def action(changePin, action):
       'pins' : pins
    }
 
-   return render_template('index.html', **templateData)
+   return render_template('main.html', **templateData)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)
