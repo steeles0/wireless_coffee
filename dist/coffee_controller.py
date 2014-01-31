@@ -4,12 +4,12 @@ from flask import Flask, render_template
 from robot_brain.gpio_pin import GPIOPin
 
 app = Flask(__name__)                                                           
-on_pin = GPIOPin(18)                                                            
+on_pin = GPIOPin(17)                                                            
 off_pin = GPIOPin(23)                                                           
 state_cycle = cycle(['on', 'off'])
 
-@app.route("/")                                                                 
-@app.route("/<state>")                                                          
+@app.route("~/wireless_coffee/dist")                                                                 
+@app.route("~/wireless_coffee/dist/<state>")                                                          
 def update_lamp(state=None):                                                    
     if state == 'on':                                                           
         on_pin.set(1)                                                           
