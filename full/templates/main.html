@@ -46,9 +46,26 @@
           <div class="inner cover">
             <h1 class="cover-heading">Wireless Coffee</h1>
             <p class="lead">
-	<a href="http://coffeepi.dnsd.me/17/on" id="on" class="btn btn-lg btn-default">Off</a>
-	<a href="http://coffeepi.dnsd.me/17/off" id="off" class="btn btn-lg btn-default">On</a>
+	<a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a>
+	<a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a>
             </p>
+
+
+			{% for pin in pins %}
+			   <p>The {{ pins[pin].name }}
+			   {% if pins[pin].state == true %}
+			      is currently on (<a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a>)
+			   {% else %}
+			      is currently off (<a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a>)
+			   {% endif %}
+			   </p>
+			   {% endfor %}
+
+			   {% if message %}
+			   <h2>{{ message }}</h2>
+			   {% endif %}
+			
+			
           </div>
 
           <div class="mastfoot">
