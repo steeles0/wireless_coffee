@@ -22,9 +22,9 @@ def main():
       pins[pin]['state'] = GPIO.input(pin)
    # Put the pin dictionary into the template data dictionary:
    templateData = {
-      'pins' : pins
-      'time' : time
-      'message' : message,
+      'pins' : pins,
+      'time' : time,
+      'message' : message
       }
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
