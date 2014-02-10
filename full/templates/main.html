@@ -28,19 +28,6 @@
   </head>
 
   <body>
-	<div class="navbar">
-	  <div class="navbar-inner">
-	    <ul class="nav">
-	      <li>	{% for pin in pins %}
-		{% if pins[pin].state == true %}
-				  <span class="label label-important">Currently ON</span>
-			   {% else %}
-				  <span class="label label-success">Currently OFF</span>
-			   {% endif %}
-			{% endfor %}</li>
-	    </ul>
-	  </div>
-	</div>
 
     <div class="site-wrapper">
 
@@ -48,10 +35,20 @@
 
         <div class="cover-container">
 
-          <div class="masthead clearfix">
-            <div class="inner">
-            </div>
-          </div>
+          	<div class="masthead clearfix">
+			            <div class="inner">
+			              <h3 class="masthead-brand"></h3>
+			              <ul class="nav masthead-nav">
+			                <li>	{% for pin in pins %}
+							{% if pins[pin].state == true %}
+									  <span class="label label-warning">Currently ON</span>
+								   {% else %}
+									  <span class="label label-success">Currently OFF</span>
+								   {% endif %}
+								{% endfor %}</li>
+			              </ul>
+			            </div>
+			          </div>
 
           <div class="inner cover">
             <h1 class="cover-heading">Wireless Coffee</h1>
@@ -67,7 +64,7 @@
 			   {% endfor %}
 
 			   {% if message %}
-			   <p><span class="label label-warning">{{ message }}</span></p>
+			   <p><span class="label label-info">{{ message }}</span></p>
 			   {% endif %}
 			
 			
