@@ -15,6 +15,9 @@ for pin in pins:
    GPIO.setup(pin, GPIO.OUT)
    GPIO.output(pin, GPIO.LOW)
 
+message = "Device ready for use"
+time = strftime("%H:%M:%S", gmtime())
+
 @app.route("/")
 def main():
    # For each pin, read the pin state and store it in the pins dictionary:
