@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-   17 : {'name' : 'Coffee Maker', 'state' : GPIO.LOW}
+   17 : {'name' : 'Mr. Coffee', 'state' : GPIO.LOW}
    }
 
 # Set each pin as an output and make it low:
@@ -44,11 +44,11 @@ def action(changePin, action):
       # Set the pin high:
       GPIO.output(changePin, GPIO.HIGH)
       # Save the status message to be passed into the template:
-      message = deviceName + " turned on"
+      message = "Spaceballs the coffee maker went to plaid "
       time = strftime("%H:%M:%S", gmtime())
    if action == "off":
       GPIO.output(changePin, GPIO.LOW)
-      message = deviceName + "turned off"
+      message = "Spaceballs the coffeemaker now off "
       time = strftime("%H:%M:%S", gmtime())
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
