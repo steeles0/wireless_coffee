@@ -40,16 +40,16 @@ def action(changePin, action):
       GPIO.output(changePin, GPIO.HIGH)
       # Save the status message to be passed into the template:
       message = "Turned " + deviceName + " on."
-	  time = strftime("%H:%M:%S", localtime())
+      time = strftime("%H:%M:%S", localtime())
    if action == "off":
       GPIO.output(changePin, GPIO.LOW)
       message = "Turned " + deviceName + " off."
-	  time = strftime("%H:%M:%S", localtime())
+      time = strftime("%H:%M:%S", localtime())
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
       message = "Toggled " + deviceName + "."
-	  time = strftime("%H:%M:%S", localtime())
+      time = strftime("%H:%M:%S", localtime())
 
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
