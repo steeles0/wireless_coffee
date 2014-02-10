@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+from datetime import datetime
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -39,13 +40,16 @@ def action(changePin, action):
       GPIO.output(changePin, GPIO.HIGH)
       # Save the status message to be passed into the template:
       message = "Turned " + deviceName + " on."
+	  time = str(datetime.now())
    if action == "off":
       GPIO.output(changePin, GPIO.LOW)
       message = "Turned " + deviceName + " off."
+	  time = str(datetime.now())
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
       message = "Toggled " + deviceName + "."
+	  time = str(datetime.now())
 
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
@@ -54,7 +58,8 @@ def action(changePin, action):
    # Along with the pin dictionary, put the message into the template data dictionary:
    templateData = {
       'message' : message,
-      'pins' : pins
+      'pins' : pins,
+	  'time' : time
    }
 
    return render_template('main.html', **templateData)
