@@ -28,6 +28,19 @@
   </head>
 
   <body>
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <ul class="nav">
+	      <li>	{% for pin in pins %}
+		{% if pins[pin].state == true %}
+				  <span class="label label-important">Currently ON</span>
+			   {% else %}
+				  <span class="label label-success">Currently OFF</span>
+			   {% endif %}
+			{% endfor %}</li>
+	    </ul>
+	  </div>
+	</div>
 
     <div class="site-wrapper">
 
@@ -47,11 +60,9 @@
 
 			{% for pin in pins %}
 			   {% if pins[pin].state == true %}
-				  <p><span class="label label-important">Currently ON</span></p>
-			      <a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a>
+			      <p><a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a></p>
 			   {% else %}
-				  <p><span class="label label-success">Currently OFF</span></p>
-			      <a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a>
+			      <p><a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a></p>
 			   {% endif %}
 			   {% endfor %}
 
