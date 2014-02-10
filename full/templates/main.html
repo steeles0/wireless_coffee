@@ -47,16 +47,16 @@
 
 			{% for pin in pins %}
 			   {% if pins[pin].state == true %}
-				  <span class="label label-important">Currently ON</span>
+				  <p><span class="label label-important">Currently ON</span></p>
 			      <a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a>
 			   {% else %}
-				  <span class="label label-success">Currently OFF</span>
+				  <p><span class="label label-success">Currently OFF</span></p>
 			      <a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a>
 			   {% endif %}
 			   {% endfor %}
 
 			   {% if message %}
-			   <span class="label label-warning">{{ message }}</span>
+			   <p><span class="label label-warning">{{ message }}</span></p>
 			   {% endif %}
 			
 			
