@@ -66,8 +66,8 @@ def action(changePin, action):
    if action == "checktemp":
 	#When checking temp
 	f = open(device_file, 'r')
-    lines = f.readlines()
-    f.close()
+	lines = f.readlines()
+	f.close()
 	lines = read_temp_raw()
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
