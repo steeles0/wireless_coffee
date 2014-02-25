@@ -86,6 +86,7 @@ def action(changePin, action):
    if action == "checktemp":
 	#When checking temp
 	temp = read_temp()
+	message = read_temp()
    if action == "on":
       # Set the pin high:
       GPIO.output(changePin, GPIO.HIGH)
