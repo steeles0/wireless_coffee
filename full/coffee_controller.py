@@ -86,6 +86,7 @@ def action(changePin, action):
    if action == "checktemp":
 	#When checking temp
 	temp = read_temp()
+	time = strftime("%H:%M:%S", gmtime())
 	message = read_temp()
    if action == "on":
       # Set the pin high:
