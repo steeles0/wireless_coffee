@@ -33,6 +33,8 @@ for pin in pins:
 message = "Device ready for use"
 time = strftime("%H:%M:%S", gmtime())
 temp = 0
+temp_c = 0
+temp_f = 0
 
 #Starting to setup task-scheduling using Celery
 @periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
