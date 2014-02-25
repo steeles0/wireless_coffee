@@ -1,9 +1,24 @@
 import RPi.GPIO as GPIO
+#TempSens
+import os
+import glob
+import time
+
 from time import gmtime, strftime
 from flask import Flask, render_template, request
+from celery.task.schedules import crontab
+from celery.decorators import periodic_task
 app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
+
+#Temp Sens
+os.system('modprobe w1-gpio')
+os.system('modprobe w1-therm')
+ 
+base_dir = '/sys/bus/w1/devices/'
+device_folder = glob.glob(base_dir + '28*')[0]
+device_file = device_folder + '/w1_slave'
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
@@ -17,6 +32,13 @@ for pin in pins:
 
 message = "Device ready for use"
 time = strftime("%H:%M:%S", gmtime())
+temp = 0
+
+#Starting to setup task-scheduling using Celery
+@periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
+def scheduled_coffee():
+    GPIO.output(17, GPIO.HIGH)
+
 
 @app.route("/")
 def main():
@@ -28,6 +50,7 @@ def main():
       'pins' : pins,
       'time' : time,
       'message' : message
+	  'temp' : temp
       }
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
@@ -40,6 +63,20 @@ def action(changePin, action):
    # Get the device name for the pin being changed:
    deviceName = pins[changePin]['name']
    # If the action part of the URL is "on," execute the code indented below:
+   if action == "checktemp":
+	#When checking temp
+	f = open(device_file, 'r')
+    lines = f.readlines()
+    f.close()
+	lines = read_temp_raw()
+    while lines[0].strip()[-3:] != 'YES':
+        time.sleep(0.2)
+        lines = read_temp_raw()
+    equals_pos = lines[1].find('t=')
+    if equals_pos != -1:
+        temp_string = lines[1][equals_pos+2:]
+        temp_c = float(temp_string) / 1000.0
+        temp_f = temp_c * 9.0 / 5.0 + 32.0
    if action == "on":
       # Set the pin high:
       GPIO.output(changePin, GPIO.HIGH)
@@ -64,7 +101,8 @@ def action(changePin, action):
    templateData = {
       'message' : message,
       'pins' : pins,
-	  'time' : time
+	  'time' : time,
+	  'temp' : temp_f
    }
 
    return render_template('main.html', **templateData)
