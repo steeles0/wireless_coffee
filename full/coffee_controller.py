@@ -49,7 +49,7 @@ def main():
    templateData = {
       'pins' : pins,
       'time' : time,
-      'message' : message
+      'message' : message,
 	  'temp' : temp
       }
    # Pass the template data into the template main.html and return it to the user
