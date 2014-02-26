@@ -78,7 +78,7 @@ def timer(h, m, s):
 	fullWaitTime = (h*60*60)+(m*60)+s
 	sleep(fullWaitTime)
 	# Set the pin high:
-    GPIO.output(17, GPIO.HIGH)
+	GPIO.output(17, GPIO.HIGH)
     # Save the status message to be passed into the template:
     message = "Coffee started after " + fullWaitTime + " seconds "
     time = strftime("%H:%M:%S", gmtime())
