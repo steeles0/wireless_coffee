@@ -44,7 +44,6 @@ def scheduled_coffee():
 	    lines = f.readlines()
 	    f.close()
 	    return lines
-
 def read_temp():
     lines = read_temp_raw()
     while lines[0].strip()[-3:] != 'YES':
