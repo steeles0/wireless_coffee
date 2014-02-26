@@ -74,6 +74,16 @@
 				    <span class="sr-only">Temperature</span>
 				  </div>
 				</div>
+				
+				{% from "_formhelpers.html" import render_field %}
+				<form method=post action="/timerset">
+				  <dl>
+				    {{ render_field(form.TimerH) }}
+				    {{ render_field(form.TimerM) }}
+				    {{ render_field(form.TimerS) }}
+				  </dl>
+				  <p><input type=submit value=Register>
+				</form>
 			
 			
           </div>
