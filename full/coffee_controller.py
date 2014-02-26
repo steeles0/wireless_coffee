@@ -97,7 +97,7 @@ def timeron():
     time = strftime("%H:%M:%S", gmtime())
     temp = read_temp()
 	
-	templateData = {
+    templateData = {
 		'message' : message,
 		'pins' : pins,
 		'time' : time,
