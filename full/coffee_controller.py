@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import os
 import glob
 import time
+from wtforms import Form, BooleanField, TextField, PasswordField, validators
 
 from time import gmtime, strftime
 from flask import Flask, render_template, request
@@ -11,6 +12,12 @@ from celery.decorators import periodic_task
 app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
+
+#For the timer
+class TimerForm(Form):
+    timeseth = TextField('TimerH', [validators.Length(min=0, max=2)])
+	timesetm = TextField('TimerM', [validators.Length(min=0, max=2)])
+	timesets = TextField('TimerS', [validators.Length(min=0, max=2)])
 
 #Temp Sens
 os.system('modprobe w1-gpio')
@@ -39,8 +46,6 @@ temp_f = 0
 @periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
 def scheduled_coffee():
     GPIO.output(17, GPIO.HIGH)
-def timer_math():
-	current_time = time.clock()
 def read_temp_raw():
     f = open(device_file, 'r')
     lines = f.readlines()
@@ -77,13 +82,27 @@ def main():
 
 
 @app.route('/timerset', methods=['GET', 'POST'])
-def register():
+def timeron():
     form = TimerForm(request.form)
     if request.method == 'POST' and form.validate():
-        time_set = form.timeset.data
-        flash('Thanks for registering')
-        return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+        time_h = form.timeseth.data
+		time_m = form.timesetm.data
+		time_s = form.timesets.data
+	time_in_seconds = (time_h*60*60)+(time_m*60)+time_s
+	sleep(time_in_seconds)
+	# Set the pin high:
+    GPIO.output(changePin, GPIO.HIGH)
+    # Save the status message to be passed into the template:
+    message = "Coffee started "
+    time = strftime("%H:%M:%S", gmtime())
+    temp = read_temp()
+	templateData = {
+	      'message' : message,
+	      'pins' : pins,
+		  'time' : time,
+		  'temp' : temp
+	   }
+    return render_template('main.html', **templateData)
 
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<changePin>/<action>")
