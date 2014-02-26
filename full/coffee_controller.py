@@ -80,20 +80,20 @@ def timer(h, m, s):
 	# Set the pin high:
 	GPIO.output(17, GPIO.HIGH)
     # Save the status message to be passed into the template:
-    message = "Coffee started after " + fullWaitTime + " seconds "
-    time = strftime("%H:%M:%S", gmtime())
-    temp = read_temp()
+	message = "Coffee started after " + fullWaitTime + " seconds "
+	time = strftime("%H:%M:%S", gmtime())
+	temp = read_temp()
 	
 	# For each pin, read the pin state and store it in the pins dictionary:
 	for pin in pins:
-    	pins[pin]['state'] = GPIO.input(pin)
+		pins[pin]['state'] = GPIO.input(pin)
 
 	# Along with the pin dictionary, put the message into the template data dictionary:
- 	templateData = {
-	   'message' : message,
-	   'pins' : pins,
-	   'time' : time,
-	   'temp' : temp
+	templateData = {
+		'message' : message,
+		'pins' : pins,
+		'time' : time,
+		'temp' : temp
 	   }
 	return render_template('main.html', **templateData)
 	
