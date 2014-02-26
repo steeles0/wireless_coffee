@@ -73,7 +73,30 @@ def main():
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
 
+@app.route("/timer/<h>/<m>/<s>")
+def timer(h, m, s):
+	fullWaitTime = (h*60*60)+(m*60)+s
+	sleep(fullWaitTime)
+	# Set the pin high:
+    GPIO.output(17, GPIO.HIGH)
+    # Save the status message to be passed into the template:
+    message = "Coffee started after " + fullWaitTime + " seconds "
+    time = strftime("%H:%M:%S", gmtime())
+    temp = read_temp()
+	
+	# For each pin, read the pin state and store it in the pins dictionary:
+	for pin in pins:
+    	pins[pin]['state'] = GPIO.input(pin)
 
+	# Along with the pin dictionary, put the message into the template data dictionary:
+ 	templateData = {
+	   'message' : message,
+	   'pins' : pins,
+	   'time' : time,
+	   'temp' : temp
+	   }
+	return render_template('main.html', **templateData)
+	
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<changePin>/<action>")
 def action(changePin, action):
