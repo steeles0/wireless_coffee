@@ -15,7 +15,7 @@ GPIO.setmode(GPIO.BCM)
 
 #For the timer
 class TimerForm(Form):
-    timeseth = TextField('TimerH', [validators.Length(min=0, max=2)])
+	timeseth = TextField('TimerH', [validators.Length(min=0, max=2)])
 	timesetm = TextField('TimerM', [validators.Length(min=0, max=2)])
 	timesets = TextField('TimerS', [validators.Length(min=0, max=2)])
 
