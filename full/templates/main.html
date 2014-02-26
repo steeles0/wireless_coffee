@@ -78,9 +78,9 @@
 				{% from "_formhelpers.html" import render_field %}
 				<form method=post action="/timerset">
 				  <dl>
-				    {{ render_field(form.TimerH) }}
-				    {{ render_field(form.TimerM) }}
-				    {{ render_field(form.TimerS) }}
+				    {{ render_field(form.timerseth) }}
+				    {{ render_field(form.timersetm) }}
+				    {{ render_field(form.timersets) }}
 				  </dl>
 				  <p><input type=submit value=Register>
 				</form>
