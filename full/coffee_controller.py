@@ -73,7 +73,7 @@ def main():
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
 
-@app.route("/timer?time_h=<h>&time_m=<m>&time_s=<s>")
+@app.route("/timer?time_h=<h>&time_m=<m>&time_s=<s>&start_button=true")
 def timer(h, m, s):
 	h = int(h)
 	m = int(m)
