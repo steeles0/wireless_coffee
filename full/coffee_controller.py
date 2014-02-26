@@ -96,11 +96,12 @@ def timeron():
     message = "Coffee started "
     time = strftime("%H:%M:%S", gmtime())
     temp = read_temp()
+	
 	templateData = {
-	      'message' : message,
-	      'pins' : pins,
-		  'time' : time,
-		  'temp' : temp
+		'message' : message,
+		'pins' : pins,
+		'time' : time,
+		'temp' : temp
 	   }
     return render_template('main.html', **templateData)
 
