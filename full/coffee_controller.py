@@ -31,7 +31,7 @@ for pin in pins:
    GPIO.output(pin, GPIO.LOW)
 
 message = "Device ready for use"
-time = strftime("%H:%M:%S", gmtime())
+cur_time = strftime("%H:%M:%S", gmtime())
 temp_c = 0
 temp_f = 0
 
@@ -66,7 +66,7 @@ def main():
    # Put the pin dictionary into the template data dictionary:
    templateData = {
       'pins' : pins,
-      'time' : time,
+      'time' : cur_time,
       'message' : message,
 	  'temp' : temp
       }
@@ -76,12 +76,13 @@ def main():
 @app.route("/timer/<h>/<m>/<s>")
 def timer(h, m, s):
 	fullWaitTime = (h*60*60)+(m*60)+s
-	time.sleep(fullWaitTime)
+	if fullWaitTime>0
+		time.sleep(fullWaitTime)
 	# Set the pin high:
 	GPIO.output(17, GPIO.HIGH)
     # Save the status message to be passed into the template:
 	message = "Coffee started after " + fullWaitTime + " seconds "
-	time = strftime("%H:%M:%S", gmtime())
+	cur_time = strftime("%H:%M:%S", gmtime())
 	temp = read_temp()
 	
 	# For each pin, read the pin state and store it in the pins dictionary:
@@ -92,7 +93,7 @@ def timer(h, m, s):
 	templateData = {
 		'message' : message,
 		'pins' : pins,
-		'time' : time,
+		'time' : cur_time,
 		'temp' : temp
 	   }
 	return render_template('main.html', **templateData)
@@ -108,25 +109,25 @@ def action(changePin, action):
    if action == "checktemp":
 	#When checking temp
 	temp = read_temp()
-	time = strftime("%H:%M:%S", gmtime())
+	cur_time = strftime("%H:%M:%S", gmtime())
 	message = read_temp()
    if action == "on":
       # Set the pin high:
       GPIO.output(changePin, GPIO.HIGH)
       # Save the status message to be passed into the template:
       message = "Coffee started "
-      time = strftime("%H:%M:%S", gmtime())
+      cur_time = strftime("%H:%M:%S", gmtime())
       temp = read_temp()
    if action == "off":
       GPIO.output(changePin, GPIO.LOW)
       message = "Coffee ended "
-      time = strftime("%H:%M:%S", gmtime())
+      cur_time = strftime("%H:%M:%S", gmtime())
       temp = read_temp()
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
       message = deviceName + " toggled"
-      time = strftime("%H:%M:%S", gmtime())
+      cur_time = strftime("%H:%M:%S", gmtime())
       temp = read_temp()
 
    # For each pin, read the pin state and store it in the pins dictionary:
@@ -137,7 +138,7 @@ def action(changePin, action):
    templateData = {
       'message' : message,
       'pins' : pins,
-	  'time' : time,
+	  'time' : cur_time,
 	  'temp' : temp
    }
 
