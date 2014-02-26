@@ -89,8 +89,7 @@ def timeron():
 		time_m = form.timesetm.data
 		time_s = form.timesets.data
 		time_in_seconds = (time_h*60*60)+(time_m*60)+time_s
-	sleep(time_in_seconds)
-	
+		sleep(time_in_seconds)
 	# Set the pin high:
     GPIO.output(changePin, GPIO.HIGH)
     # Save the status message to be passed into the template:
