@@ -32,7 +32,6 @@ for pin in pins:
 
 message = "Device ready for use"
 time = strftime("%H:%M:%S", gmtime())
-temp = read_temp()
 temp_c = 0
 temp_f = 0
 
@@ -40,7 +39,25 @@ temp_f = 0
 @periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
 def scheduled_coffee():
     GPIO.output(17, GPIO.HIGH)
+	def read_temp_raw():
+	    f = open(device_file, 'r')
+	    lines = f.readlines()
+	    f.close()
+	    return lines
 
+	def read_temp():
+	    lines = read_temp_raw()
+	    while lines[0].strip()[-3:] != 'YES':
+	        time.sleep(0.2)
+	        lines = read_temp_raw()
+	    equals_pos = lines[1].find('t=')
+	    if equals_pos != -1:
+	        temp_string = lines[1][equals_pos+2:]
+	        temp_c = float(temp_string) / 1000.0
+	        temp_f = temp_c * 9.0 / 5.0 + 32.0
+	        return temp_c, temp_f
+	
+temp = read_temp()
 
 @app.route("/")
 def main():
@@ -57,23 +74,6 @@ def main():
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
 
-def read_temp_raw():
-    f = open(device_file, 'r')
-    lines = f.readlines()
-    f.close()
-    return lines
-
-def read_temp():
-    lines = read_temp_raw()
-    while lines[0].strip()[-3:] != 'YES':
-        time.sleep(0.2)
-        lines = read_temp_raw()
-    equals_pos = lines[1].find('t=')
-    if equals_pos != -1:
-        temp_string = lines[1][equals_pos+2:]
-        temp_c = float(temp_string) / 1000.0
-        temp_f = temp_c * 9.0 / 5.0 + 32.0
-        return temp_c, temp_f
 
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<changePin>/<action>")
