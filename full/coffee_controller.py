@@ -32,7 +32,7 @@ for pin in pins:
 
 message = "Device ready for use"
 time = strftime("%H:%M:%S", gmtime())
-temp = 0
+temp = read_temp()
 temp_c = 0
 temp_f = 0
 
