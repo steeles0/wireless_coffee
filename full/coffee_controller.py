@@ -91,12 +91,12 @@ def action(changePin, action):
       # Set the pin high:
       GPIO.output(changePin, GPIO.HIGH)
       # Save the status message to be passed into the template:
-      message = "Spaceballs the coffee maker went to plaid "
+      message = "Coffee started "
       time = strftime("%H:%M:%S", gmtime())
       temp = read_temp()
    if action == "off":
       GPIO.output(changePin, GPIO.LOW)
-      message = "Spaceballs the coffeemaker now off "
+      message = "Coffee ended "
       time = strftime("%H:%M:%S", gmtime())
       temp = read_temp()
    if action == "toggle":
