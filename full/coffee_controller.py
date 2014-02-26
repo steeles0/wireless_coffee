@@ -76,7 +76,7 @@ def main():
 @app.route("/timer/<h>/<m>/<s>")
 def timer(h, m, s):
 	fullWaitTime = (h*60*60)+(m*60)+s
-	sleep(fullWaitTime)
+	time.sleep(fullWaitTime)
 	# Set the pin high:
 	GPIO.output(17, GPIO.HIGH)
     # Save the status message to be passed into the template:
