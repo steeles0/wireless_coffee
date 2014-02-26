@@ -39,6 +39,8 @@ temp_f = 0
 @periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
 def scheduled_coffee():
     GPIO.output(17, GPIO.HIGH)
+def timer_math():
+	current_time = time.clock()
 def read_temp_raw():
     f = open(device_file, 'r')
     lines = f.readlines()
@@ -73,6 +75,15 @@ def main():
    # Pass the template data into the template main.html and return it to the user
    return render_template('main.html', **templateData)
 
+
+@app.route('/timerset', methods=['GET', 'POST'])
+def register():
+    form = TimerForm(request.form)
+    if request.method == 'POST' and form.validate():
+        time_set = form.timeset.data
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 # The function below is executed when someone requests a URL with the pin number and action in it:
 @app.route("/<changePin>/<action>")
