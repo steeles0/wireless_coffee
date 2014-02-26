@@ -75,7 +75,7 @@ def main():
 
 @app.route("/timer/<h>/<m>/<s>")
 def timer(h, m, s):
-	fullWaitTime = (float(h)*60*60)+(float(m)*60)+float(s)
+	fullWaitTime = int((float(h)*60*60)+(float(m)*60)+float(s))
 	if fullWaitTime>0:
 		time.sleep(fullWaitTime)
 	# Set the pin high:
