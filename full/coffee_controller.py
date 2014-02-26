@@ -115,7 +115,7 @@ def action(changePin, action):
       'message' : message,
       'pins' : pins,
 	  'time' : time,
-	  'temp' : temp_f
+	  'temp' : temp
    }
 
    return render_template('main.html', **templateData)
