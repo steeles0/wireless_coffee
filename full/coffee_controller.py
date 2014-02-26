@@ -39,11 +39,11 @@ temp_f = 0
 @periodic_task(run_every=crontab(hour=7, minute=30, day_of_week="mon"))
 def scheduled_coffee():
     GPIO.output(17, GPIO.HIGH)
-	def read_temp_raw():
-	    f = open(device_file, 'r')
-	    lines = f.readlines()
-	    f.close()
-	    return lines
+def read_temp_raw():
+    f = open(device_file, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
 def read_temp():
     lines = read_temp_raw()
     while lines[0].strip()[-3:] != 'YES':
