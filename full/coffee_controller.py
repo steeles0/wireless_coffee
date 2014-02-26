@@ -76,7 +76,7 @@ def main():
 @app.route("/timer/<h>/<m>/<s>")
 def timer(h, m, s):
 	fullWaitTime = (h*60*60)+(m*60)+s
-	if fullWaitTime>0
+	if fullWaitTime>0:
 		time.sleep(fullWaitTime)
 	# Set the pin high:
 	GPIO.output(17, GPIO.HIGH)
