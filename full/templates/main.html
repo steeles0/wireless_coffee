@@ -16,6 +16,11 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='libraries/prettify/prettify.css') }}" rel="stylesheet" type="text/css" media="all">
+	<script src="{{ url_for('static', filename='libraries/jquery-1.9.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='libraries/prettify/prettify.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap-touchspin/bootstrap.touchspin.js') }}"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -83,41 +88,41 @@
 				<form class="form-horizontal" name="Timer" onsubmit="location.href='/timer/' + document.getElementById('time_h').value + '/' + document.getElementById('time_m').value + '/' + document.getElementById('time_s').value; return false;">
 				<fieldset>
 
-				<!-- Form Name -->
-				<legend>Timer</legend>
+					<div class="form-group">
+				        <label for="time_h" class="col-md-5 control-label">Hours:</label> <input id="time_h" type="text" value="0" name="time_h" class="col-md-7 form-control">
+				<label for="time_m" class="col-md-5 control-label">Minutes:</label> <input id="time_m" type="text" value="0" name="time_m" class="col-md-7 form-control">
+				<label for="time_s" class="col-md-5 control-label">Seconds:</label> <input id="time_s" type="text" value="0" name="time_s" class="col-md-7 form-control">
+				    </div>
+				</form>
 
-				<div class="row">
-				  <div class="col-lg-2">
-					<div class="control-group">
-				  <label class="control-label" for="time_h">Hours</label>
-				  <div class="controls">
-				    <input id="time_h" name="time_h" type="text" placeholder="HH" class="input-mini" value="0">
+				<script>
+				    $("input[name='time_h']").TouchSpin({
+				        min: 0,
+				        max: 24,
+				        stepinterval: 1,
+				        maxboostedstep: 10000000,
+				        prefix: 'Hours'
+				    });
+				</script>
+				<script>
+				    $("input[name='time_m']").TouchSpin({
+				        min: 0,
+				        max: 60,
+				        stepinterval: 1,
+				        maxboostedstep: 10000000,
+				        prefix: 'Minutes'
+				    });
+				</script>
+				<script>
+				    $("input[name='time_s']").TouchSpin({
+				        min: 0,
+				        max: 60,
+				        stepinterval: 1,
+				        maxboostedstep: 10000000,
+				        prefix: 'Seconds'
+				    });
+				</script>
 
-				  </div>
-				</div>
-				</div><!-- /.col-lg-3 -->
-				
-				  <div class="col-lg-2">
-				<!-- Text input-->
-				<div class="control-group">
-				  <label class="control-label" for="time_m">Minutes</label>
-				  <div class="controls">
-				    <input id="time_m" name="time_m" type="text" placeholder="MM" class="input-mini" value="0">
-
-				  </div>
-				</div>
-				</div><!-- /.col-lg-3 -->
-				
-				  <div class="col-lg-2">
-				<!-- Text input-->
-				<div class="control-group">
-				  <label class="control-label" for="time_s">Seconds</label>
-				  <div class="controls">
-				    <input id="time_s" name="time_s" type="text" placeholder="SS" class="input-mini" value="0">
-
-				  </div>
-				</div>
-				</div><!-- /.col-lg-3 -->
 				  <div class="col-lg-3">
 				<!-- Button -->
 				<div class="control-group">
