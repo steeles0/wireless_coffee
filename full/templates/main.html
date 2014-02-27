@@ -58,9 +58,19 @@
 
 			{% for pin in pins %}
 			   {% if pins[pin].state == true %}
-			      <p><a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Off</a></p>
+			      <p><a href="http://coffeepi.dnsd.me/17/off" id="on" class="btn btn-lg btn-default">Turn Off</a></p>
+					<div class="progress progress-striped">
+					  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ temp }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ temp }}%"> {{ temp }}
+					    <span class="sr-only">Temperature</span>
+					  </div>
+					</div>
 			   {% else %}
-			      <p><a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">On</a></p>
+			      <p><a href="http://coffeepi.dnsd.me/17/on" id="off" class="btn btn-lg btn-default">Turn On</a></p>
+				<div class="progress">
+				  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ temp }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ temp }}%"> {{ temp }}
+				    <span class="sr-only">Temperature</span>
+				  </div>
+				</div>
 			   {% endif %}
 			   {% endfor %}
 
@@ -68,12 +78,6 @@
 			   <p><span class="label label-info">{{ message }} at {{ time }}</span></p>
 			   {% endif %}
 				
-					{{ temp }}C
-				   <div class="progress progress-striped active">
-				  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ temp }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ temp }}%">
-				    <span class="sr-only">Temperature</span>
-				  </div>
-				</div>
 				
 				<form class="form-horizontal" name="Timer" onsubmit="location.href='/timer/' + document.getElementById('time_h').value + '/' + document.getElementById('time_m').value + '/' + document.getElementById('time_s').value; return false;">
 				<fieldset>
