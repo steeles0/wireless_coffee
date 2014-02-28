@@ -129,12 +129,12 @@
 
 				  <div class="col-lg-3">
 				<!-- Button -->
-			
+				<div class="control-group">
 				  <label class="control-label" for="start_button"></label>
 				  <div class="controls">
 				    <button id="start_button" name="start_button" class="btn btn-success" value="true">Start</button>
 				  </div>
-			
+				</div>
 				</div><!-- /.col-lg-3 -->
 				</div>
 
