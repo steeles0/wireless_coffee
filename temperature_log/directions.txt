@@ -1,0 +1,23 @@
+Directions:
+1. Setup SQLite DB
+
+$ sudo apt-get install sqlite3
+$ sqlite3 templog.db
+
+BEGIN;
+CREATE TABLE temps (timestamp DATETIME, temp NUMERIC);
+COMMIT;
+.quit
+
+
+$ sudo cp templog.db /var/www/
+$ sudo chown www-data:www-data /var/www/templog.db 
+
+2. Install Script
+
+$ sudo chmod +x /usr/lib/cgi-bin/monitor.py 
+$ sudo chown www-data:www-data /usr/lib/cgi-bin/monitor.py 
+$ sudo crontab -u www-data -e
+
+
+Taken from:http://raspberrywebserver.com/cgiscripting/rpi-temperature-logger/
